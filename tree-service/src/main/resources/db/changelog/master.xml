@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-table-category" author="Lizogubov Eugeny">
+        <preConditions>
+            <not>
+                <tableExists tableName="category"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE category
+            (
+                id        BIGSERIAL PRIMARY KEY,
+                name      VARCHAR(255) NOT NULL UNIQUE,
+                level     INT          NOT NULL,
+                parent_id BIGINT REFERENCES category (id) ON DELETE CASCADE
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

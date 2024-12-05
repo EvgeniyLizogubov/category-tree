@@ -1,13 +1,13 @@
-package com.github.evgenylizogubov.web;
+package com.github.evgenylizogubov.treeservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebApplication {
+public class TreeServiceApplication {
     
     public static void main(String[] args) {
-        SpringApplication.run(WebApplication.class, args);
+        SpringApplication.run(TreeServiceApplication.class, args);
     }
     
 }

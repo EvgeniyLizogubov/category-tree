@@ -28,7 +28,7 @@
         <url/>
     </scm>
     <modules>
-        <module>web</module>
+        <module>tree-service</module>
     </modules>
     <properties>
         <java.version>21</java.version>
