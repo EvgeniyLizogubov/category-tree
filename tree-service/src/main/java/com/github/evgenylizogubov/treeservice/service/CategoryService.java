@@ -1,7 +1,9 @@
 package com.github.evgenylizogubov.treeservice.service;
 
+import com.github.evgenylizogubov.treeservice.dto.CategoryDto;
 import com.github.evgenylizogubov.treeservice.model.Category;
 import com.github.evgenylizogubov.treeservice.repository.CategoryRepository;
+import com.github.evgenylizogubov.treeservice.util.CategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +14,16 @@ import java.util.List;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
     
-    public List<Category> getAll() {
+    public List<CategoryDto> getAll() {
         List<Category> categories = categoryRepository.findAll();
-        return categories;
+        return categories.stream()
+                .map(CategoryMapper::mapToCategoryDto)
+                .toList();
     }
     
-    public Category add(String parentName, String childName) {
+    public CategoryDto add(String parentName, String newCategoryName) {
         Category newCategory = new Category();
-        newCategory.setName(childName);
+        newCategory.setName(newCategoryName);
         newCategory.setLevel(1);
         
         if (parentName != null) {
@@ -32,17 +36,17 @@ public class CategoryService {
             newCategory.setLevel(parent.getLevel() + 1);
         }
         
-        return categoryRepository.save(newCategory);
+        Category saved = categoryRepository.save(newCategory);
+        return CategoryMapper.mapToCategoryDto(saved);
     }
     
-    public boolean delete(String name) {
-        Category category = categoryRepository.getByName(name);
+    public int delete(String categoryName) {
+        Category category = categoryRepository.getByName(categoryName);
         
         if (category == null) {
-            return false;
+            return 0;
         }
         
-        categoryRepository.delete(category);
-        return true;
+        return categoryRepository.deleteByName(categoryName);
     }
 }

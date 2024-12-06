@@ -1,6 +1,5 @@
 package com.github.evgenylizogubov.treeservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,12 +36,10 @@ public class Category {
     private int level;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="parent_id", foreignKey=@ForeignKey(name = "FK_PARENT_ID"))
-    @JsonIgnore
+    @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(name = "FK_PARENT_ID"))
     private Category parent;
     
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private List<Category> children = new ArrayList<>();
 }
