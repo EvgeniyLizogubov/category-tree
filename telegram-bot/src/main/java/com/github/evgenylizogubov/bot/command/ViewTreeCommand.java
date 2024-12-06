@@ -9,6 +9,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.List;
 
+/**
+ * Обработчик команды просмотра дерева категорий
+ */
 @Component
 @RequiredArgsConstructor
 public class ViewTreeCommand implements Command {

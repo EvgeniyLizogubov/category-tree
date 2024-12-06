@@ -26,6 +26,11 @@ public class CommandsHandler {
         );
     }
     
+    /**
+     *Получает данные от пользователя, выбирает нужный обработчик и возвращает сформированный ответ
+     * @param update данные от пользователя
+     * @return сформированный ответ для пользователя
+     */
     public SendMessage handleCommands(Update update) {
         String messageText = update.getMessage().getText();
         String command = messageText.split(" ")[0];

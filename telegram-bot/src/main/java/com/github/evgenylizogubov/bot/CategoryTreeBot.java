@@ -37,6 +37,10 @@ public class CategoryTreeBot extends TelegramLongPollingBot {
         }
     }
     
+    /**
+     *Отправка сообщения пользователю
+     * @param sendMessage сообщение для отправки
+     */
     private void sendMessage(SendMessage sendMessage) {
         try {
             execute(sendMessage);
